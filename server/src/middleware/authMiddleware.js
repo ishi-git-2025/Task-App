@@ -19,7 +19,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 
         //check if user exists
         if(!user){
-            res.status(404).json({message:"user not found!"});
+            return res.status(404).json({message:"user not found!"});
         }
 
         //set user details in the request object, Adds the user to req.user so the protected route can access it

@@ -77,7 +77,7 @@ export const UserContextProvider = ({children}) => {
                 password: userState.password,
             },
             {
-                withCredentials: true //send cookies to the server
+                withCredentials: true //tells the browser to accept cookies from the response
             }
             );
 

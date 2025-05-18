@@ -3,9 +3,13 @@ import mongoose from 'mongoose';
 const TaskSchema = new mongoose.Schema({
     title:{
         type:String,
-        default:"No description",
+         required: [true, "Please provide a title"],
+      unique: true,
     },
-
+     description: {
+      type: String,
+      default: "No description",
+    },
     dueDate:{
         type: Date,
         default: Date.now()
@@ -28,7 +32,7 @@ const TaskSchema = new mongoose.Schema({
 
     user:{
         type:mongoose.Schema.ObjectId,
-        ref: "User",
+        ref: "User", //referencing the 'User' model
         required:true
     }
 },{timestamps:true})
