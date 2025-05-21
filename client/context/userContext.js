@@ -49,7 +49,7 @@ export const UserContextProvider = ({children}) => {
 
         //redirect to login page
         router.push("/login");
-
+        
     } catch (error) {
         const message = error?.response?.data?.message || "Something went wrong";
         toast.error(message);

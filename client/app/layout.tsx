@@ -4,6 +4,12 @@ import "./globals.css";
 import UserProvider from "@/providers/UserProvider";
 import { Toaster } from "react-hot-toast";
 
+import Header from "./Components/Header/Header";
+import MiniSidebar from "./Components/MiniSidebar/MiniSidebar";
+import MainContentLayout from "@/providers/MainContentLayout";
+import SidebarProvider from "@/providers/SidebarProvider";
+import MainLayout from "@/providers/MainLayout";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,8 +34,20 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <UserProvider>
         <Toaster position="top-center" />
-        <UserProvider>{children}</UserProvider>
+
+        <div className="h-full flex overflow-hidden">
+          <MiniSidebar />
+          <div className="flex-1 flex flex-col">
+            <Header />
+            <MainContentLayout>
+              <MainLayout>{children}</MainLayout>
+              <SidebarProvider /> 
+            </MainContentLayout>
+          </div>
+        </div>
+        </UserProvider>
       </body>
     </html>
   );
