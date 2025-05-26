@@ -67,7 +67,7 @@ export const loginUser = asyncHandler(async (req, res) =>{
 
     //validate if blank
     if(!email || !password){
-        return res.status(400).json({message:"All fields are requires"})
+        return res.status(400).json({message:"All fields are required"})
     }
 
     //check if user exists
@@ -122,6 +122,7 @@ export const logoutUser = asyncHandler(async (req,res)=>
     res.status(200).json({message:"user logged out"});
 });
 
+//getUser details here
 export const getUser = asyncHandler(async (req, res) => {
   // get user details from the token ----> exclude password
   const user = await User.findById(req.user._id).select("-password"); //protect middleware is allowing us to access user
@@ -136,18 +137,21 @@ export const getUser = asyncHandler(async (req, res) => {
 
 // login status
 export const userLoginStatus = asyncHandler(async (req, res) => {
-  const token = req.cookies.token;
+  const token = req.cookies?.token;
 
-  if (!token) {
-    // 401 Unauthorized
-    res.status(401).json({ message: "Not authorized, please login!" });
+  if (!token) {    // 401 Unauthorized
+    return res.status(401).json({ message: "Not authorized, please login!" });
   }
-  // verify the token
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  if (decoded) {
-    res.status(200).json(true);
-  } else {
-    res.status(401).json(false);
+  try {  // verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    if (decoded) {
+      return res.status(200).json(true);
+    } else {
+      return res.status(401).json(false);
+    }
+  } catch (error) {
+    return res.status(401).json({ message: "Invalid token, please login again!" });
   }
 });

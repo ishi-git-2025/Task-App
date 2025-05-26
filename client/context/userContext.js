@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import React, {createContext, useEffect, useState, useContext} from 'react';
+import React, {
+    // createContext,
+     useEffect, useState, useContext} from 'react';
 import toast from 'react-hot-toast';
 
 // defining a context where user info can be shared
@@ -20,7 +22,7 @@ export const UserContextProvider = ({children}) => {
     }) //Initially all fields are empty strings
 
     //to keep track of whether the app is still loading
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     //register user
     const registerUser = async (e) => {
@@ -129,14 +131,49 @@ export const UserContextProvider = ({children}) => {
 
             if(!loggedIn){
                 router.push("/login");
-            }
+            };
+             return loggedIn; //<-- return value!
+
         } catch (error) {
-            console.log("error occured",error);
+            console.log("error occured in logging out user",error);
+            // setLoading(false)
         }
-    console.log("user logged in status", loggedIn)
-     return loggedIn;
     };
- 
+    
+    //get user details
+    const getUser = async () =>{
+        try {
+            const res = await axios.get(`${serverUrl}/api/v1/user`,{
+                withCredentials:true,
+            });
+            console.log('res of user api -->>>',res.data);
+            setUser((prevState)=>{
+                return{
+                    ...prevState,
+                    ...res.data,
+                }
+            });
+            setLoading(false)
+        } catch (error) {
+            console.log("error getting user details", error);
+            setLoading(false)
+        }
+    };
+
+    useEffect(() =>{
+        const loginStatusGetUser = async () =>{
+        const isLoggedIn = await userLoginStatus();
+        console.log("calling loginStatusGetUser",isLoggedIn)
+
+        if(isLoggedIn){
+            console.log("user is logged in")
+            getUser();
+        }
+       };
+
+       loginStatusGetUser(); //calling
+    },[]);
+
     return(
         <UserContext.Provider value={{
             registerUser, 
@@ -144,7 +181,9 @@ export const UserContextProvider = ({children}) => {
             handlerUserInput,
             loginUser,
             logoutUser,
-            userLoginStatus
+            userLoginStatus,
+            getUser,
+            user,
             }}>
             {children}
         </UserContext.Provider>

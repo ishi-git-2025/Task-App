@@ -9,7 +9,6 @@ import MiniSidebar from "./Components/MiniSidebar/MiniSidebar";
 import MainContentLayout from "@/providers/MainContentLayout";
 import SidebarProvider from "@/providers/SidebarProvider";
 import MainLayout from "@/providers/MainLayout";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,6 +21,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+console.log('redirect function');
   return (
     <html lang="en">
       <head>
