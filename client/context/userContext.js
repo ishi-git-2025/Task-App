@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import React, {
-    // createContext,
+    createContext,
      useEffect, useState, useContext} from 'react';
 import toast from 'react-hot-toast';
 
@@ -98,6 +98,7 @@ export const UserContextProvider = ({children}) => {
             console.log("error logging in user",error);
             toast.error(error.response.data.message)
         }
+        // setLoading(true)
     };
 
     // logout user
@@ -119,6 +120,7 @@ export const UserContextProvider = ({children}) => {
 
     //get user logged in status
     const userLoginStatus = async () => {
+        setLoading(true);
         let loggedIn = false;
         try {
             const res = await axios.get(`${serverUrl}/api/v1/login-status`,{
@@ -136,12 +138,13 @@ export const UserContextProvider = ({children}) => {
 
         } catch (error) {
             console.log("error occured in logging out user",error);
-            // setLoading(false)
         }
+        setLoading(false);
     };
     
     //get user details
     const getUser = async () =>{
+        setLoading(true);
         try {
             const res = await axios.get(`${serverUrl}/api/v1/user`,{
                 withCredentials:true,
@@ -153,17 +156,19 @@ export const UserContextProvider = ({children}) => {
                     ...res.data,
                 }
             });
-            setLoading(false)
+
         } catch (error) {
             console.log("error getting user details", error);
             setLoading(false)
         }
+        setLoading(false)
     };
 
     useEffect(() =>{
         const loginStatusGetUser = async () =>{
         const isLoggedIn = await userLoginStatus();
         console.log("calling loginStatusGetUser",isLoggedIn)
+        // setLoading(true)
 
         if(isLoggedIn){
             console.log("user is logged in")
@@ -184,6 +189,7 @@ export const UserContextProvider = ({children}) => {
             userLoginStatus,
             getUser,
             user,
+            loading
             }}>
             {children}
         </UserContext.Provider>

@@ -7,7 +7,7 @@ export const createTask = asyncHandler(async (req,res) =>{
     const { title, description, dueDate, priority, status } = req.body;
 
     if (!title || title.trim() === "") {
-      res.status(400).json({ message: "Title is required!" });
+      return res.status(400).json({ message: "Title is required!" });
     }
 
     if (!description || description.trim() === "") {
@@ -84,10 +84,10 @@ export const updateTask = asyncHandler(async (req,res) => {
     const userId = req.user._id;
 
     const {id} = req.params;
-    const {title, description, dueDate, priority,status, completed }= req.body;
+    const {title, description, dueDate, priority, status, completed }= req.body;
 
     if(!id){
-      res.status(400).json({message : "please provide a task id"})
+      return res.status(400).json({message : "please provide a task id"})
     }
 
     const task = await TaskModel.findById(id);
@@ -119,7 +119,7 @@ export const updateTask = asyncHandler(async (req,res) => {
 export const deleteTask = asyncHandler(async (req,res) => {
   try {
       const userId = req.user._id;
-      const {id} = req.params;
+      const {id} = req.params; //to access route parameters
       
     const task = await TaskModel.findById(id); //same as TaskModel.findOne({ _id: id })
 
@@ -131,7 +131,7 @@ export const deleteTask = asyncHandler(async (req,res) => {
       return res.status(401).json({message:"Not authorized to delete this task"})
     }
 
-    await TaskModel.findByIdAndDelete(id);
+    await TaskModel.findByIdAndDelete(id); //deleting the task from db
 
     return res.status(200).json({message:"Task deleted successfully!"});
 

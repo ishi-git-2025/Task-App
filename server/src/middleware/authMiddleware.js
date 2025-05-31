@@ -9,7 +9,7 @@ export const protect = asyncHandler(async (req, res, next) => {
         const token = req.cookies.token;
 
         if (!token){
-            res.status(401).json({message:"not authorised, please login"})
+            return res.status(401).json({message:"not authorised, please login"})
         }
         //verifyy the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -28,6 +28,6 @@ export const protect = asyncHandler(async (req, res, next) => {
         next();
         //calls next() to pass control to getUser
     } catch (error) {
-        res.status(401).json({message:"not authorized, token failed!"});
+        return res.status(401).json({message:"not authorized, token failed!"});
     }
 })

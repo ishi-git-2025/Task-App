@@ -3,29 +3,6 @@
 /*---break---*/
 @custom-variant dark (&:is(.dark *));
 
-body{
-    background-color: #f9f9f9;
-    height: 100vh;
-    position: relative;
-}
-.auth-page{
-    height: 100vh;
-    background: url('../public/glass-bg.png') no-repeat center center fixed;
-}
-
-/*utilities*/
-/* Select any element with the class u-triangle and style its ::before pseudo-element */
-/* using the ::before pseudo-element. */
-.u-triangle::before{
-    content:'';
-    position: absolute;
-    top:  50%;
-    left: -7px;
-    width:0 ;
-    height: 0;
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid #3aafae;
-}
 /*---break---*/
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -133,12 +110,32 @@ body{
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.552 0.016 285.938);
 }
-/*---break---*/
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
+
+body{
+    background-color: #f9f9f9;
+    height: 100vh;
+    position: relative;
+}
+.auth-page{
+    height: 100vh;
+    background: url('../public/glass-bg.png') no-repeat center center fixed;
+}
+
+/* to remove scroll bar */
+.main-layout::-webkit-scrollbar{
+    width: 0;
+}
+
+/*utilities*/
+/* Select any element with the class u-triangle and style its ::before pseudo-element */
+/* using the ::before pseudo-element. */
+.u-triangle::before{
+    content:'';
+    position: absolute;
+    top:  50%;
+    left: -7px;
+    width:0 ;
+    height: 0;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #3aafae;
 }

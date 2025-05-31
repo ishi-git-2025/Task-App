@@ -1,6 +1,6 @@
 "use client";
 import { useUserContext } from "@/context/userContext";
-import Reacr from "react";
+import React from "react";
 import Image from "next/image";
 import next from "next";
 
@@ -15,8 +15,9 @@ return <div className="m-6">
               border-2 border-transparent hover:border-2 hover:border-white">
             <div>
             <Image
-            src={user?.photo}
-            alt="avatar"
+            // src={user?.photo || "/no-photo.jpg"}
+            src="/no-photo.jpg"
+            alt="default image"
             width={70}
             height={70}
             className="rounded-full"
