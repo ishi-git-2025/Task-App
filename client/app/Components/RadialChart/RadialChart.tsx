@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-// import { useTasks } from "@/context/taskContext";
+import { useTasks } from "@/context/taskContext";
 
 export const description = "A radial chart with stacked sections";
 
@@ -32,23 +32,23 @@ const chartConfig = { //colour here
 } satisfies ChartConfig;
 
 function RadialChart() {
-//   const { tasks, completedTasks, activeTasks } = useTasks();
+  const { tasks, completedTasks, activeTasks } = useTasks();
   const tasksTotal = 6
 //  tasks.length;
 
   const chartData = [
     {
-        pending: 4,
-        completed: 2
-    //   pending: activeTasks.length,
-    //   completed: completedTasks.length,
+        // pending: 4,
+        // completed: 2
+      pending: activeTasks.length,
+      completed: completedTasks.length,
     },
   ];
 
   return (
-    <Card className="flex flex-col border-2 border-white shadow-none bg-[#EDEDED]">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Comleted vs Pending Tasks</CardTitle>
+    <Card className="flex flex-col border-2 border-white shadow-none bg-[#EDEDED] max-h-[300px] mb-4">
+      <CardHeader className="items-center text-center pb-0">
+        <CardTitle className="mb-1  text-center">Completed vs Pending Tasks</CardTitle>
         <CardDescription>Task completion status.</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
@@ -109,7 +109,7 @@ function RadialChart() {
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
+      {/* <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
           Task completion improved by 12% this month{" "}
           <TrendingUp className="h-4 w-4" />
@@ -117,7 +117,7 @@ function RadialChart() {
         <div className="leading-none text-muted-foreground">
           Analysis based on tasks completed in the last 30 days.
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

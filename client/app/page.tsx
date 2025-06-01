@@ -4,13 +4,16 @@ import { useTasks } from "@/context/taskContext";
 import { useUserContext } from "@/context/userContext";
 import useRedirect from "@/hooks/useUserRedirect";
 import Filters from "./Components/Filters/Filters";
-import TaskItem from "./TaskItem/TaskItem";
+import TaskItem from "./Components/TaskItem/TaskItem";
 import { Task } from "@/utils/types";
+import { filteredTasks } from "@/utils/utilities";
 
 export default function Home() {
   useRedirect("/login");
 
-  const {tasks} = useTasks().tasks;
+  const {tasks, openModalForAdd, priority} = useTasks();
+
+  const filtered = filteredTasks(tasks, priority);
 
   return (
     <main className="m-6 h-full">
@@ -19,13 +22,19 @@ export default function Home() {
         <Filters />
       </div>
 
-      <div className="pb-[2rem] mt-6 grid-cols-[repeat(auto-fill, mimax(300px,1fr))] gap-[1.5rem]">
+      <div className="pb-[2rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]">
       { 
       // iterating over our array of tasks and for each we render <TaskItem /> component
-        tasks?.map((task: Task, i:number) => (
+        filtered.map((task: Task, i:number) => (
           <TaskItem key={i} task={task}/>
         ))
       }
+
+      <button className="h-[16rem] w-full py-2 rounded-md text-lg font-medium text-gray-500 border-dashed border-2 border-gray-400
+          hover:bg-gray-300 hover:border-none transition duration-200 ease-in-out"
+          onClick={openModalForAdd}>
+        Add new task
+      </button>
       </div>
     </main>
   );

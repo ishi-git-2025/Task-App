@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import TaskModel from "../../models/task/TaskModel.js";
 
+//create task func
 export const createTask = asyncHandler(async (req,res) =>{
 
  try {
@@ -33,6 +34,7 @@ export const createTask = asyncHandler(async (req,res) =>{
   }
 });
 
+//get all tasks
 export const getTasks = asyncHandler(async (req,res) =>{
   try {
     const userId = req.user._id;
@@ -79,6 +81,7 @@ export const getTask = asyncHandler(async (req,res) =>{
   }
 });
 
+//to update task
 export const updateTask = asyncHandler(async (req,res) => {
   try {
     const userId = req.user._id;
@@ -116,6 +119,7 @@ export const updateTask = asyncHandler(async (req,res) => {
   }
 });
 
+//delete the task
 export const deleteTask = asyncHandler(async (req,res) => {
   try {
       const userId = req.user._id;

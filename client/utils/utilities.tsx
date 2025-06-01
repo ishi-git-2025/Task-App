@@ -1,5 +1,6 @@
 // import moment from "moment";
 import moment from "moment-timezone";
+import { Task } from "./types";
 
 export const formatTime = (createdAt: string) => {
     const now= moment().tz("Asia/Kolkata"); //in IST
@@ -27,4 +28,17 @@ export const formatTime = (createdAt: string) => {
 
     //If none matches return date
     return created.format("DD/MM/YYYY")
+};
+
+export const filteredTasks = (tasks: Task[], priority: string) => {
+    switch (priority) {
+      case "low":
+        return tasks.filter((task) => task.priority === "low");
+      case "medium":
+        return tasks.filter((task) => task.priority === "medium");
+      case "high":
+        return tasks.filter((task) => task.priority === "high");
+      default:
+        return tasks;
+    }
 };

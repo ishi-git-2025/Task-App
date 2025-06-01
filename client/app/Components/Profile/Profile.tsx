@@ -3,12 +3,13 @@ import { useUserContext } from "@/context/userContext";
 import React from "react";
 import Image from "next/image";
 import next from "next";
+import { useTasks } from "@/context/taskContext";
 
 function Profile(){
-const {getUser, user} = useUserContext();
-// const userId = user?._id ? user._id : '';
+const { getUser, user } = useUserContext();
+const { tasks, activeTasks, completedTasks } = useTasks();
 
-return <div className="m-6">
+return <div className="m-4">
         {/* user name */}
         <div className="px-2 py-4 flex items-center gap-3 bg-[#E6E6E6]/20 rounded-[0.8rem]
               hover:bg-[#E6E6E6]/50 transition duration-300 ease-in-out cursor-pointer 
@@ -37,26 +38,26 @@ return <div className="m-6">
                     <p>Total tasks:</p>
                     <p className="pl-4 relative flex gap-2">
                         <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-purple-500 rounded-[5px]"></span>
-                        <span className="font-medium text-4xl text-[#333]"> 6
-                            {/* {tasks.length} */}
+                        <span className="font-medium text-4xl text-[#333]">
+                            {tasks.length}
                         </span>
                     </p>
                 </div>
                  <div className="text-gray-400">
                     <p>In progress:</p>
                     <p className="pl-4 relative flex gap-2">
-                        <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-pink-300 rounded-[5px]"></span>
-                        <span className="font-medium text-4xl text-[#333]"> 1
-                            {/* {tasks.length} */}
+                        <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-orange-400 rounded-[5px]"></span>
+                        <span className="font-medium text-4xl text-[#333]">
+                            {activeTasks.length}
                         </span>
                     </p>
                 </div>
                  <div className="text-gray-400">
                     <p>Open tasks:</p>
                     <p className="pl-4 relative flex gap-2">
-                        <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-orange-400 rounded-[5px]"></span>
-                        <span className="font-medium text-4xl text-[#333]"> 2
-                            {/* {tasks.length} */}
+                        <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-yellow-300 rounded-[5px]"></span>
+                        <span className="font-medium text-4xl text-[#333]">
+                            {activeTasks.length}
                         </span>
                     </p>
                 </div>
@@ -64,14 +65,14 @@ return <div className="m-6">
                     <p>Completed:</p>
                     <p className="pl-4 relative flex gap-2">
                         <span className="absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-green-400 rounded-[5px]"></span>
-                        <span className="font-medium text-4xl text-[#333]"> 3
-                            {/* {tasks.length} */}
+                        <span className="font-medium text-4xl text-[#333]">
+                            {completedTasks.length}
                         </span>
                     </p>
                 </div>
             </div>
         </div>
-        <h3 className="mt-8 font-medium">Activity</h3>
+        <h3 className="mt-12 font-medium">Activity</h3>
     </div>
 }
 

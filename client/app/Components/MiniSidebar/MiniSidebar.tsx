@@ -1,8 +1,8 @@
 "use client";
+//left sidebar-
 //reusable SVG icon component
 import IconFileCheck from "@/public/icons/IconFileCheck";
 import IconGrid from "@/public/icons/IconGrid";
-import IconStopwatch from "@/public/icons/IconStopwatch";
 import { title } from "process";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -33,11 +33,6 @@ function MiniSidebar() {
       icon: <IconCheck strokeColor={getStrokeColor("/pending")} />,
       title: "Pending",
       link: "/pending",
-    },
-    {
-      icon: <IconStopwatch strokeColor={getStrokeColor("/overdue")} />,
-      title: "Overdue",
-      link: "/overdue",
     }
     ]
     return ( 
