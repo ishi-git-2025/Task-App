@@ -32,11 +32,14 @@ function Header() {
             </p>
         </div>
         <div className="h-[50px] flex items-center gap-[10.4rem]">
+            
+            {userId && 
             <button className="px-8 py-3 bg-[#3aafae] text-white rounded-[50px]
                 hover:bg-[#06858C] hover:text-white transition-all duration-200 ease-in-out"
                 onClick={openModalForAdd}>
                 Create a new task
-            </button>
+            </button>}
+
             <div className="flex gap-4 items-center">
                 <Link href="https://pomofocus.io/" //to pomodoro timer
                     passHref //Tells Next.js to pass the href to the child 

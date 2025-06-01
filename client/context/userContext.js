@@ -72,7 +72,7 @@ export const UserContextProvider = ({children}) => {
 
     //Login the user
     const loginUser = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         try {
             const res = await axios.post(`${serverUrl}/api/v1/login`,{
                 email: userState.email,
@@ -103,6 +103,7 @@ export const UserContextProvider = ({children}) => {
 
     // logout user
     const logoutUser = async () => {
+        setLoading(true)
         try {
         const res = await axios.get(`${serverUrl}/api/v1/logout`, {
             withCredentials: true, // send cookies to the server
@@ -116,6 +117,7 @@ export const UserContextProvider = ({children}) => {
         console.log("Error logging out user", error);
         toast.error(error.response.data.message);
         }
+        // setLoading(false)
     };
 
     //get user logged in status

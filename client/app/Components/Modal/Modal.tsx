@@ -85,7 +85,7 @@ function Modal(){
             <select
                 className="bg-[#F9F9F9] p-2 rounded-md border border-[#dfe1e6] cursor-pointer"
                 name="priority"
-                value={task.priority}
+                value={task.priority || ""}
                 onChange={(e) => handleInput("priority")(e)}
             >
                 <option value="low">Low</option>
