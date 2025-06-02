@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const useRedirect = (redirect: string) => {
-  const {user , loading} = useUserContext();
+  const {user , loading, getUser} = useUserContext();
   const router = useRouter();
 
   useEffect(() => {

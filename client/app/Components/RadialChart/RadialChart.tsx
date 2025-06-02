@@ -33,8 +33,7 @@ const chartConfig = { //colour here
 
 function RadialChart() {
   const { tasks, completedTasks, activeTasks } = useTasks();
-  const tasksTotal = 6
-//  tasks.length;
+  const tasksTotal = tasks.length;
 
   const chartData = [
     {

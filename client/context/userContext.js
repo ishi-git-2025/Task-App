@@ -108,11 +108,16 @@ export const UserContextProvider = ({children}) => {
         const res = await axios.get(`${serverUrl}/api/v1/logout`, {
             withCredentials: true, // send cookies to the server
         });
-
-        toast.success("User logged out successfully");
-
+        console.log("logout user res",res?.status);
+        if (res?.status === 200){
+            setUser(null);
+            router.push("/login").then(() => {
+                window.location.reload(); // Forcefull reload after routing
+            });
+                toast.success("User logged out successfully");
+        }
         // redirect to login page
-        router.push("/login");
+    
         } catch (error) {
         console.log("Error logging out user", error);
         toast.error(error.response.data.message);

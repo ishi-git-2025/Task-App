@@ -55,9 +55,9 @@ function MiniSidebar() {
             </ul>
 
             <div className="mb-[1.5rem]">
-              <button className="w-12 h-12 flex justify-center items-center border-2 border-[#EB4E31]  p-2 rounded-full">
+              {/* <button className="w-12 h-12 flex justify-center items-center border-2 border-[#EB4E31]  p-2 rounded-full">
                 <IconDeleteAll strokeColor="#EB4E31"/>
-              </button>
+              </button> */}
             </div>
 
         </div>
