@@ -30,10 +30,10 @@ export const UserContextProvider = ({children}) => {
         if(
             !userState.email.includes("@") || 
             !userState.password ||
-            userState.password.length < 6
+            userState.password.length < 8
         )
         {   //pop up message
-            toast.error("Please enter a valid email and password (min 6 char)");
+            toast.error("Please enter a valid email and password (min 8 char)");
             return;
         }
 

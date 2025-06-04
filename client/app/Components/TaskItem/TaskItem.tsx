@@ -35,7 +35,7 @@ function TaskItem({task}: TaskItemProp){
                 <div className='mt-auto flex justify-between item.center'>
                     <p className='text-sm text-gray-400'>
                         {formatTime(task.createdAt)}
-                         {/* <br />{moment(task.createdAt).tz("Asia/Kolkata").format("DD/MM/YYYY hh:mm A")} */}
+                         {/* <br />Due Date:{moment(task.dueDate).tz("Asia/Kolkata").format("DD/MM/YYYY hh:mm A")} */}
                     </p>                
                     <p className={`text-sm font-bold ${getPriorityColor(task.priority)}`}>
                         {task.priority}

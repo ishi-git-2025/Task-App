@@ -14,8 +14,8 @@ export const registerUser = asyncHandler(async(req, res) =>{
     }
 
     //Password length
-    if (password.length < 6){
-        return res.status(400).json({message:"Password must be atleast 6 characters"});
+    if (password.length < 8){
+        return res.status(400).json({message:"Password must be atleast 8 characters"});
     }
 
     //check for existing user

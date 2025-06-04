@@ -32,11 +32,10 @@ function Modal(){
 
         if(modalMode === "edit"){
             updateTask(task);
-        } else if (modalMode === "add"){
-            createTask(task)
             //task will contain the updated task state
+        } else if (modalMode === "add"){
+            createTask(task) 
         }
-
         closeModal();
     };
 
